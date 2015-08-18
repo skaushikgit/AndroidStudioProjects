@@ -9,10 +9,4 @@
         android:layout_height="match_parent"
         android:id="@+id/tvFirstNameId"
         android:text="FirstName"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/tvLastNameId"
-        android:text="LastName"/>
 </FrameLayout>
