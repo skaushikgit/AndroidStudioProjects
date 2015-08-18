@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.skaushik.myapplication.R;
@@ -22,12 +23,21 @@ import java.util.Observer;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProjectListView extends FrameLayout {
+public class ProjectListView extends ListView {
 
     OnSelectProjectListener projectListener;
     ProjectListViewAdapter adapter;
-    ElasticListView listView;
 
+
+    String[] values = new String[] { "Android List View",
+            "Adapter implementation",
+            "Simple List View In Android",
+            "Create List View Android",
+            "Android Example",
+            "List View Source Code",
+            "List View Array Adapter",
+            "Android Example List View"
+    };
 
     public ProjectListView(Context context) {
         super(context);
@@ -47,12 +57,7 @@ public class ProjectListView extends FrameLayout {
 
     private void init() {
         adapter = new ProjectListViewAdapter();
-        listView = new ElasticListView(getContext());
-        listView.setMaxOverScrollDistance(0, 80);
-
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-        addView(listView, lp);
-        listView.setAdapter(adapter);
+        this.setAdapter(adapter);
     }
 
 
@@ -67,14 +72,12 @@ public class ProjectListView extends FrameLayout {
 
     private static class ViewHolder {
         TextView tvFirstName;
-        TextView tvLastName;
     }
 
     private class ProjectListViewAdapter extends BaseAdapter {
-
         @Override
         public int getCount() {
-            return 2;
+            return values.length;
         }
 
         @Override
@@ -94,7 +97,6 @@ public class ProjectListView extends FrameLayout {
                 viewHolder = new ViewHolder();
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, null);
                 viewHolder.tvFirstName = (TextView) convertView.findViewById(R.id.tvFirstNameId);
-                viewHolder.tvLastName = (TextView) convertView.findViewById(R.id.tvLastNameId);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
@@ -103,12 +105,13 @@ public class ProjectListView extends FrameLayout {
             setListViewItems(position, viewHolder);
             return convertView;
         }
+
+        private void setListViewItems(int position, ViewHolder holder) {
+            holder.tvFirstName.setText(values[position]);
+        }
+
     }
 
-    private static void setListViewItems(int position, ViewHolder holder) {
-        holder.tvFirstName.setText("Hello Saurabh");
-        holder.tvLastName.setText("Last Name");
-    }
 
 }
 
